@@ -5,7 +5,6 @@ import logging
 
 logger = logging.getLogger("uvicorn.error")
 
-# Try to import sklearn, but don't crash if it's not installed — provide fallback
 try:
     from sklearn.linear_model import LinearRegression
     _SKLEARN_AVAILABLE = True
@@ -13,25 +12,11 @@ except Exception:
     _SKLEARN_AVAILABLE = False
     logger.warning("scikit-learn not available: using numpy.polyfit fallback")
 
-
 def run_advanced_analysis():
-    """
-    Example advanced analysis:
-      - builds a tiny time series
-      - fits a linear model (sklearn if available, polyfit fallback otherwise)
-      - returns metadata and a next-step prediction
-    Returns a JSON-serializable dict.
-    """
-    # 1. Example dataset
-    data = {
-        "day": [1, 2, 3, 4, 5],
-        "value": [10, 12, 15, 14, 18]
-    }
+    data = {"day": [1, 2, 3, 4, 5], "value": [10, 12, 15, 14, 18]}
     df = pd.DataFrame(data)
-
-    X = df[["day"]].values  # shape (n,1)
-    y = df["value"].values  # shape (n,)
-
+    X = df[["day"]].values
+    y = df["value"].values
     next_day = int(df["day"].max()) + 1
 
     try:
@@ -42,9 +27,7 @@ def run_advanced_analysis():
             pred_value = float(prediction[0])
             used = "sklearn.LinearRegression"
         else:
-            # fallback to numpy.polyfit (degree 1)
             coeffs = np.polyfit(df["day"].values, df["value"].values, 1)
-            # coeffs[0] = slope, coeffs[1] = intercept
             pred_value = float(coeffs[0] * next_day + coeffs[1])
             used = "numpy.polyfit(deg=1)_fallback"
 
