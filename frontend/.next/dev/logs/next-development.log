@@ -1,0 +1,18 @@
+[00:00:05.358] Server  LOG     It looks like you're trying to use TypeScript but do not have the required package(s) installed.
+Installing dependencies
+
+If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your app and pages directories).
+
+[00:00:05.464] Server  LOG     
+[00:00:05.465] Server  LOG     Installing devDependencies (npm):
+[00:00:05.465] Server  LOG     - @types/react
+[00:00:05.466] Server  LOG     - @types/node
+[00:00:05.466] Server  LOG     
+[00:01:11.699] Server  LOG     
+[00:01:12.810] Server  LOG     ✓ Ready in 71.4s
+[00:07:35.965] Server  LOG     ○ Compiling / ...
+[00:08:17.188] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
+[00:08:19.904] Server  LOG     ✓ Finished writing to filesystem cache in 21.1s
+[00:08:32.485] Server  LOG     ✓ Finished writing to filesystem cache in 10.6s
+[00:15:44.579] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
+[00:29:12.992] Browser ERROR   unhandledRejection: TypeError: Failed to fetch
