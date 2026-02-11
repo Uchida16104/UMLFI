@@ -5,6 +5,7 @@ import logging
 
 logger = logging.getLogger("uvicorn.error")
 
+# Try sklearn, but provide numpy.polyfit fallback
 try:
     from sklearn.linear_model import LinearRegression
     _SKLEARN_AVAILABLE = True
@@ -12,14 +13,21 @@ except Exception:
     _SKLEARN_AVAILABLE = False
     logger.warning("scikit-learn not available: using numpy.polyfit fallback")
 
+
 def run_advanced_analysis():
+    """
+    Minimal example analysis:
+      - fits linear trend to tiny dataset
+      - returns next-day prediction and metadata
+    """
     data = {"day": [1, 2, 3, 4, 5], "value": [10, 12, 15, 14, 18]}
     df = pd.DataFrame(data)
-    X = df[["day"]].values
-    y = df["value"].values
-    next_day = int(df["day"].max()) + 1
 
     try:
+        X = df[["day"]].values
+        y = df["value"].values
+        next_day = int(df["day"].max()) + 1
+
         if _SKLEARN_AVAILABLE:
             model = LinearRegression()
             model.fit(X, y)
